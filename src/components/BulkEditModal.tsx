@@ -257,6 +257,27 @@ export default function BulkEditModal({ selectedIds, onClose, onSave }: BulkEdit
                         className="w-full px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs bg-white"
                       />
                     </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-500 mb-0.5">Dispatched To</label>
+                      <input 
+                        type="text"
+                        value={transitUpdates[tp]?.dispatchedTo || ''}
+                        onChange={e => handleTransitChange(tp, 'dispatchedTo', e.target.value)}
+                        placeholder="Leave blank to keep unchanged"
+                        className="w-full px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-500 mb-0.5">Loaded CTN</label>
+                      <input 
+                        type="number"
+                        min={0}
+                        value={transitUpdates[tp]?.loadedCtn || ''}
+                        onChange={e => handleTransitChange(tp, 'loadedCtn', e.target.value)}
+                        placeholder="Leave blank to keep unchanged"
+                        className="w-full px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs bg-white font-mono"
+                      />
+                    </div>
                   </div>
                 </div>
               ))}
