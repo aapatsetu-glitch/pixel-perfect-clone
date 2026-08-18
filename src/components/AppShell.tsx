@@ -4,6 +4,7 @@ import {
   Bot, MapPin, ClipboardList, Layers, 
   BarChart3, StickyNote, LogOut
 } from 'lucide-react';
+import adoLogoFull from '../assets/ado-logo-full.png.asset.json';
 import type { View } from '../views';
 import Dashboard from './Dashboard';
 import ConsignmentsView from './ConsignmentsView';
