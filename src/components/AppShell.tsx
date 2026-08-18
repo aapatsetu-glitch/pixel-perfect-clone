@@ -203,7 +203,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
         </header>
 
         {/* View Content */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden p-3 md:p-4 bg-slate-50 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-3 md:p-4 bg-sky-50 custom-scrollbar">
           <div className="w-full min-w-0">
             {renderView()}
           </div>
