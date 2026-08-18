@@ -24,7 +24,7 @@ export default function EditConsignmentModal({ consignment, onClose, onSave }: E
     }));
   };
 
-  const handleTransitChange = (tp: TransitPoint, field: keyof TransitData, value: string) => {
+  const handleTransitChange = (tp: TransitPoint, field: keyof TransitData, value: string | number | null) => {
     setFormData(prev => {
       const currentTpData = prev.transitPoints?.[tp] || { containerNo: '', loadingDate: '' };
       return {
@@ -347,6 +347,29 @@ export default function EditConsignmentModal({ consignment, onClose, onSave }: E
                             value={tpData.loadingDate}
                             onChange={e => handleTransitChange(tp, 'loadingDate', e.target.value)}
                             className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">Dispatched To</label>
+                          <input
+                            type="text"
+                            value={tpData.dispatchedTo || ''}
+                            onChange={e => handleTransitChange(tp, 'dispatchedTo', e.target.value)}
+                            placeholder={`Next destination from ${tp}`}
+                            className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:bg-white focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">Loaded CTN</label>
+                          <input
+                            type="number"
+                            min={0}
+                            value={tpData.loadedCtn ?? ''}
+                            onChange={e => handleTransitChange(tp, 'loadedCtn', e.target.value === '' ? null : Number(e.target.value))}
+                            placeholder={`Cartons loaded at ${tp}`}
+                            className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-mono focus:bg-white focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                       </div>

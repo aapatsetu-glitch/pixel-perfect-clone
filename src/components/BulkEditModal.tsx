@@ -20,15 +20,17 @@ export default function BulkEditModal({ selectedIds, onClose, onSave }: BulkEdit
   const [remarks, setRemarks] = useState('');
   
   // Transit points sub-fields
-  const [transitUpdates, setTransitUpdates] = useState<Partial<Record<TransitPoint, { containerNo: string, loadingDate: string }>>>({});
+  type TransitDraft = { containerNo: string; loadingDate: string; dispatchedTo: string; loadedCtn: string };
+  const emptyDraft: TransitDraft = { containerNo: '', loadingDate: '', dispatchedTo: '', loadedCtn: '' };
+  const [transitUpdates, setTransitUpdates] = useState<Partial<Record<TransitPoint, TransitDraft>>>({});
   
   const [loading, setLoading] = useState(false);
 
-  const handleTransitChange = (tp: TransitPoint, field: 'containerNo' | 'loadingDate', value: string) => {
+  const handleTransitChange = (tp: TransitPoint, field: keyof TransitDraft, value: string) => {
     setTransitUpdates(prev => ({
       ...prev,
       [tp]: {
-        ...(prev[tp] || { containerNo: '', loadingDate: '' }),
+        ...(prev[tp] || emptyDraft),
         [field]: value
       }
     }));
@@ -52,11 +54,15 @@ export default function BulkEditModal({ selectedIds, onClose, onSave }: BulkEdit
     // Filter transit updates to only non-empty fields
     const validTransit: any = {};
     for (const [tp, data] of Object.entries(transitUpdates)) {
-      const tpEntry = data as { containerNo?: string; loadingDate?: string } | undefined;
-      if (tpEntry && (tpEntry.containerNo?.trim() || tpEntry.loadingDate?.trim())) {
+      const tpEntry = data as Partial<TransitDraft> | undefined;
+      if (!tpEntry) continue;
+      const hasValue = tpEntry.containerNo?.trim() || tpEntry.loadingDate?.trim() || tpEntry.dispatchedTo?.trim() || tpEntry.loadedCtn?.trim();
+      if (hasValue) {
         validTransit[tp] = {
           containerNo: tpEntry.containerNo?.trim() || '',
-          loadingDate: tpEntry.loadingDate?.trim() || ''
+          loadingDate: tpEntry.loadingDate?.trim() || '',
+          dispatchedTo: tpEntry.dispatchedTo?.trim() || '',
+          loadedCtn: tpEntry.loadedCtn?.trim() ? Number(tpEntry.loadedCtn) : null
         };
       }
     }
@@ -249,6 +255,27 @@ export default function BulkEditModal({ selectedIds, onClose, onSave }: BulkEdit
                         value={transitUpdates[tp]?.loadingDate || ''}
                         onChange={e => handleTransitChange(tp, 'loadingDate', e.target.value)}
                         className="w-full px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-500 mb-0.5">Dispatched To</label>
+                      <input 
+                        type="text"
+                        value={transitUpdates[tp]?.dispatchedTo || ''}
+                        onChange={e => handleTransitChange(tp, 'dispatchedTo', e.target.value)}
+                        placeholder="Leave blank to keep unchanged"
+                        className="w-full px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-500 mb-0.5">Loaded CTN</label>
+                      <input 
+                        type="number"
+                        min={0}
+                        value={transitUpdates[tp]?.loadedCtn || ''}
+                        onChange={e => handleTransitChange(tp, 'loadedCtn', e.target.value)}
+                        placeholder="Leave blank to keep unchanged"
+                        className="w-full px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs bg-white font-mono"
                       />
                     </div>
                   </div>
