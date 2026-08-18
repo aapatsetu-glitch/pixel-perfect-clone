@@ -279,6 +279,7 @@ export async function exportClientLedgerToExcel(
   const workbook = new ExcelJS.Workbook();
   workbook.creator = 'ADO International Supply Chain Management Co Ltd';
   const sheet = workbook.addWorksheet(clientName.slice(0, 28) || 'Statement');
+  sheet.properties.showGridLines = false;
 
   const widths = [12, 16, 18, 18, 16, 10, 10, 12, 14, 22, 26];
   widths.forEach((w, i) => (sheet.getColumn(i + 1).width = w));
@@ -394,8 +395,8 @@ export async function exportClientLedgerToExcel(
   if (logoBuf) {
     const logoId = workbook.addImage({ buffer: logoBuf as any, extension: 'png' });
     sheet.addImage(logoId, {
-      tl: { col: 0.1, row: 0.1 },
-      br: { col: 1.6, row: 2.6 },
+      tl: { col: 0.14, row: 0.5 },
+      br: { col: 1.9, row: 2.5 },
       editAs: 'twoCell',
     } as any);
   }
