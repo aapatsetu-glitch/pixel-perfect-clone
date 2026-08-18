@@ -137,12 +137,12 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
                 }}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all ${
                   isActive 
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-900/30' 
-                    : 'text-slate-400 hover:text-white hover:bg-slate-900'
+                    ? 'bg-sky-500 text-white shadow-md shadow-sky-500/30' 
+                    : 'text-slate-600 hover:text-sky-800 hover:bg-sky-100'
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <Icon size={17} className={isActive ? 'text-white' : 'text-slate-400'} />
+                  <Icon size={17} className={isActive ? 'text-white' : 'text-sky-500'} />
                   <span>{item.label}</span>
                 </div>
                 {item.id === 'ai' && (
