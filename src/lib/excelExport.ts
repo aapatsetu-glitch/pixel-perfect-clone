@@ -359,9 +359,9 @@ export async function exportClientLedgerToExcel(
     row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
       cell.alignment = CENTER;
       cell.border = BORDER_THIN;
-      cell.font = { size: 10, bold: colNumber === 5 || colNumber === NUM_COLS };
+      cell.font = { size: 10, bold: colNumber === 5 || colNumber >= NUM_COLS - 1 };
       if (colNumber >= 6 && colNumber <= 8) cell.numFmt = '0.00';
-      if (colNumber === NUM_COLS) {
+      if (colNumber === NUM_COLS - 1 || colNumber === NUM_COLS) {
         cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFFF00' } };
       }
     });
