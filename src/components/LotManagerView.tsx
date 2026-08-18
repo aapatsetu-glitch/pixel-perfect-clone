@@ -267,6 +267,12 @@ export default function LotManagerView() {
                       <p className="text-xs text-slate-500 font-medium">
                         {lg.consignments.length} Consignment{lg.consignments.length > 1 ? 's' : ''}
                       </p>
+                      <p className="text-[11px] font-bold text-sky-700 mt-0.5 flex items-center gap-1">
+                        <Package size={11} />
+                        {lg.containers.size > 0
+                          ? `Container: ${Array.from(lg.containers).slice(0, 2).join(', ')}${lg.containers.size > 2 ? ` +${lg.containers.size - 2}` : ''}`
+                          : 'Container: Not assigned'}
+                      </p>
                     </div>
                   </div>
                   <ChevronRight size={18} className="text-slate-400" />
