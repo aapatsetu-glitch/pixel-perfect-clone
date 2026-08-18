@@ -1,7 +1,7 @@
 import ExcelJS from 'exceljs';
 import { Consignment } from '../types';
-import logoAsset from '../assets/ado-logo.png.asset.json';
-import qrAsset from '../assets/ado-qr.png.asset.json';
+import logoUrl from '../assets/ado-logo.png';
+import qrUrl from '../assets/ado-qr.png';
 
 const BORDER_THIN: Partial<ExcelJS.Borders> = {
   top: { style: 'thin', color: { argb: 'FF000000' } },
@@ -388,8 +388,8 @@ export async function exportClientLedgerToExcel(
 
   // ---- FLOATING IMAGES: logo (top-left) + QR (right of contact block) ----
   const [logoBuf, qrBuf] = await Promise.all([
-    fetchImageBuffer(logoAsset.url),
-    fetchImageBuffer(qrAsset.url),
+    fetchImageBuffer(logoUrl),
+    fetchImageBuffer(qrUrl),
   ]);
 
   if (logoBuf) {
