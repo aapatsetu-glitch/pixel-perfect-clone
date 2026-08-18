@@ -24,7 +24,7 @@ export default function EditConsignmentModal({ consignment, onClose, onSave }: E
     }));
   };
 
-  const handleTransitChange = (tp: TransitPoint, field: keyof TransitData, value: string) => {
+  const handleTransitChange = (tp: TransitPoint, field: keyof TransitData, value: string | number | null) => {
     setFormData(prev => {
       const currentTpData = prev.transitPoints?.[tp] || { containerNo: '', loadingDate: '' };
       return {
