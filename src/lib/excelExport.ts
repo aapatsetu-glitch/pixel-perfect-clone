@@ -267,10 +267,11 @@ export async function exportClientLedgerToExcel(
     num(c.cbm),
     num(c.gw),
     portOf(c),
-    c.remarks || c.status || '-',
+    c.status || '-',
+    c.remarks || '-',
   ]);
 
-  const NUM_COLS = 10;
+  const NUM_COLS = 11;
   const safeFilename =
     filename ||
     `ADO_Statement_${clientName.replace(/[^a-zA-Z0-9_-]/g, '_')}_${new Date().toISOString().split('T')[0]}`;
@@ -279,7 +280,7 @@ export async function exportClientLedgerToExcel(
   workbook.creator = 'ADO International Supply Chain Management Co Ltd';
   const sheet = workbook.addWorksheet(clientName.slice(0, 28) || 'Statement');
 
-  const widths = [12, 16, 18, 18, 16, 10, 10, 12, 14, 26];
+  const widths = [12, 16, 18, 18, 16, 10, 10, 12, 14, 22, 26];
   widths.forEach((w, i) => (sheet.getColumn(i + 1).width = w));
 
   const styleBlock = (
@@ -305,9 +306,9 @@ export async function exportClientLedgerToExcel(
   sheet.getRow(2).height = 22;
   sheet.getRow(3).height = 20;
   sheet.mergeCells('A1:B3');
-  styleBlock('C1:J1', '义乌市阿卓国际供应链管理有限公司', { size: 11 });
-  styleBlock('C2:J2', 'ADO INTERNATIONAL SUPPLY CHAIN MANAGEMENT CO LTD', { size: 14 });
-  styleBlock('C3:J3', '广东省广州市白云区石井镇凰岗村领龙国际1F001档', { size: 11 });
+  styleBlock('C1:K1', '义乌市阿卓国际供应链管理有限公司', { size: 11 });
+  styleBlock('C2:K2', 'ADO INTERNATIONAL SUPPLY CHAIN MANAGEMENT CO LTD', { size: 14 });
+  styleBlock('C3:K3', '广东省广州市白云区石井镇凰岗村领龙国际1F001档', { size: 11 });
 
   // ---- CONTACT BLOCK (rows 4-7): left contacts, right contacts, QR area ----
   for (let r = 4; r <= 7; r++) sheet.getRow(r).height = 20;
@@ -321,10 +322,10 @@ export async function exportClientLedgerToExcel(
     'Chinese Speaking Mobile: +8613322519322\nNepali Speaking Mobile: +8619908916803\nEmail: 1973459072@qq.com\nKathmandu',
     { size: 10 }
   );
-  sheet.mergeCells('I4:J7');
+  sheet.mergeCells('I4:K7');
 
   // ---- CLIENT NAME (bold, centred) ----
-  const clientCell = styleBlock('A8:J8', clientName, { size: 14 });
+  const clientCell = styleBlock('A8:K8', clientName, { size: 14 });
   clientCell.font = { bold: true, size: 14 };
   sheet.getRow(8).height = 26;
 
@@ -339,6 +340,7 @@ export async function exportClientLedgerToExcel(
     'T.CBM',
     'T.GW',
     'Port',
+    'Status',
     'Remarks',
   ];
   const headerRow = sheet.getRow(9);
@@ -401,8 +403,8 @@ export async function exportClientLedgerToExcel(
   if (qrBuf) {
     const qrId = workbook.addImage({ buffer: qrBuf as any, extension: 'png' });
     sheet.addImage(qrId, {
-      tl: { col: 8.62, row: 3.05 },
-      br: { col: 9.3, row: 6.95 },
+      tl: { col: 9.55, row: 3.1 },
+      br: { col: 10.45, row: 6.9 },
       editAs: 'twoCell',
     } as any);
   }
