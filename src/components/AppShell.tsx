@@ -96,29 +96,29 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-slate-50 font-sans text-slate-900">
+    <div className="flex h-screen w-full overflow-hidden bg-sky-50 font-sans text-slate-900">
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 bg-slate-950 text-slate-300 w-64 z-20 flex flex-col flex-shrink-0 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 border-r border-slate-800 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed inset-y-0 left-0 bg-white text-slate-700 w-64 z-20 flex flex-col flex-shrink-0 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 border-r border-sky-200 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Brand Header */}
-        <div className="p-5 border-b border-slate-800/60 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <img
-              src={adoLogoFull.url}
-              alt="ADO International"
-              className="h-9 w-auto shrink-0"
-            />
-            <div>
-              <span className="font-extrabold text-white tracking-wider text-xs block">ADO INTERNATIONAL</span>
-              <span className="text-[10px] text-slate-400 font-medium">China-Nepal Transport</span>
-            </div>
-          </div>
+        <div className="p-5 border-b border-sky-100 bg-sky-50/70 relative">
           <button 
             onClick={() => setIsSidebarOpen(false)} 
-            className="lg:hidden text-slate-400 hover:text-white p-1"
+            className="lg:hidden absolute top-3 right-3 text-slate-400 hover:text-slate-700 p-1"
           >
             <X size={18} />
           </button>
+          <div className="flex flex-col items-center text-center space-y-2">
+            <img
+              src={adoLogoFull.url}
+              alt="ADO International"
+              className="h-20 w-auto max-w-full object-contain"
+            />
+            <span className="text-[11px] font-extrabold text-sky-800 tracking-wide leading-tight">
+              ADO International Transport Nepal
+            </span>
+          </div>
         </div>
+
 
         {/* Navigation */}
         <nav className="flex-1 py-4 px-3 space-y-1 custom-scrollbar overflow-y-auto">
@@ -137,16 +137,16 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
                 }}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all ${
                   isActive 
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-900/30' 
-                    : 'text-slate-400 hover:text-white hover:bg-slate-900'
+                    ? 'bg-sky-500 text-white shadow-md shadow-sky-500/30' 
+                    : 'text-slate-600 hover:text-sky-800 hover:bg-sky-100'
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <Icon size={17} className={isActive ? 'text-white' : 'text-slate-400'} />
+                  <Icon size={17} className={isActive ? 'text-white' : 'text-sky-500'} />
                   <span>{item.label}</span>
                 </div>
                 {item.id === 'ai' && (
-                  <span className="text-[9px] font-black bg-blue-500 text-white px-1.5 py-0.5 rounded-full uppercase">
+                  <span className="text-[9px] font-black bg-sky-500 text-white px-1.5 py-0.5 rounded-full uppercase">
                     AI
                   </span>
                 )}
@@ -156,16 +156,16 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
         </nav>
 
         {/* User Card */}
-        <div className="p-3.5 mt-auto border-t border-slate-800/60 bg-slate-900/40">
-          <div className="bg-slate-900/80 p-3 rounded-xl flex items-center space-x-3 border border-slate-800">
-            <div className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400/30 shrink-0 flex items-center justify-center text-blue-300 font-black text-xs">
+        <div className="p-3.5 mt-auto border-t border-sky-100 bg-sky-50/70">
+          <div className="bg-white p-3 rounded-xl flex items-center space-x-3 border border-sky-200 shadow-xs">
+            <div className="w-9 h-9 rounded-xl bg-sky-100 border border-sky-200 shrink-0 flex items-center justify-center text-sky-700 font-black text-xs">
               AB
             </div>
             <div className="text-left flex-1 min-w-0">
-              <div className="text-xs font-bold text-white truncate">{userEmail || 'ADO Bishal Logistics'}</div>
+              <div className="text-xs font-bold text-slate-800 truncate">{userEmail || 'ADO Bishal Logistics'}</div>
               <button
                 onClick={onSignOut}
-                className="text-[10px] text-slate-400 hover:text-white font-medium flex items-center space-x-1"
+                className="text-[10px] text-slate-500 hover:text-sky-700 font-medium flex items-center space-x-1"
               >
                 <LogOut size={11} />
                 <span>Sign out</span>
@@ -173,12 +173,13 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
             </div>
           </div>
         </div>
+
       </aside>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Header */}
-        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between z-10 shrink-0 shadow-2xs">
+        <header className="h-16 bg-white border-b border-sky-200 px-6 flex items-center justify-between z-10 shrink-0 shadow-2xs">
           <div className="flex items-center space-x-3">
             <button 
               onClick={() => setIsSidebarOpen(true)} 
@@ -194,7 +195,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-2 text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            <div className="hidden md:flex items-center space-x-2 text-xs font-bold text-sky-700 bg-sky-50 px-3 py-1.5 rounded-lg border border-sky-200">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               <span>Kathmandu HQ Active</span>
             </div>
@@ -202,7 +203,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
         </header>
 
         {/* View Content */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden p-3 md:p-4 bg-slate-50 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-3 md:p-4 bg-sky-50 custom-scrollbar">
           <div className="w-full min-w-0">
             {renderView()}
           </div>
