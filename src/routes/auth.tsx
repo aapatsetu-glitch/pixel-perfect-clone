@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Loader2, Package } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
-import adoLogoFull from "@/assets/ado-logo-full.png.asset.json";
+import adoLogoFull from "@/assets/ado-logo-full.png";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -86,7 +86,7 @@ function AuthPage() {
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
           <img
-            src={adoLogoFull.url}
+            src={adoLogoFull}
             alt="ADO International"
             className="h-28 w-auto max-w-full object-contain"
           />

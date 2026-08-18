@@ -4,7 +4,7 @@ import {
   Bot, MapPin, ClipboardList, Layers, 
   BarChart3, StickyNote, LogOut
 } from 'lucide-react';
-import adoLogoFull from '../assets/ado-logo-full.png.asset.json';
+import adoLogoFull from '../assets/ado-logo-full.png';
 import type { View } from '../views';
 import Dashboard from './Dashboard';
 import ConsignmentsView from './ConsignmentsView';
@@ -109,7 +109,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
           </button>
           <div className="flex flex-col items-center text-center space-y-2">
             <img
-              src={adoLogoFull.url}
+              src={adoLogoFull}
               alt="ADO International"
               className="h-20 w-auto max-w-full object-contain"
             />
