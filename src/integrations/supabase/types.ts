@@ -14,7 +14,123 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      consignments: {
+        Row: {
+          cbm: number
+          client_name: string
+          consignment_no: string
+          container: string
+          created_at: number
+          date: string
+          destination: string
+          dispatched_date: string
+          gw: number
+          id: string
+          loaded_ctn: number | null
+          lot_no: string | null
+          marka: string
+          origin: string
+          remarks: string
+          status: string
+          total_ctn: number
+          transit_points: Json
+          updated_at: number
+        }
+        Insert: {
+          cbm?: number
+          client_name?: string
+          consignment_no?: string
+          container?: string
+          created_at?: number
+          date?: string
+          destination?: string
+          dispatched_date?: string
+          gw?: number
+          id: string
+          loaded_ctn?: number | null
+          lot_no?: string | null
+          marka?: string
+          origin?: string
+          remarks?: string
+          status?: string
+          total_ctn?: number
+          transit_points?: Json
+          updated_at?: number
+        }
+        Update: {
+          cbm?: number
+          client_name?: string
+          consignment_no?: string
+          container?: string
+          created_at?: number
+          date?: string
+          destination?: string
+          dispatched_date?: string
+          gw?: number
+          id?: string
+          loaded_ctn?: number | null
+          lot_no?: string | null
+          marka?: string
+          origin?: string
+          remarks?: string
+          status?: string
+          total_ctn?: number
+          transit_points?: Json
+          updated_at?: number
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          audio_data_url: string | null
+          audio_duration: number | null
+          audio_transcription: string | null
+          category: string
+          color_theme: string
+          content: string
+          created_at: number
+          id: string
+          image_url: string | null
+          is_pinned: boolean
+          linked_consignment_no: string | null
+          linked_marka: string | null
+          title: string
+          updated_at: number
+        }
+        Insert: {
+          audio_data_url?: string | null
+          audio_duration?: number | null
+          audio_transcription?: string | null
+          category?: string
+          color_theme?: string
+          content?: string
+          created_at?: number
+          id: string
+          image_url?: string | null
+          is_pinned?: boolean
+          linked_consignment_no?: string | null
+          linked_marka?: string | null
+          title?: string
+          updated_at?: number
+        }
+        Update: {
+          audio_data_url?: string | null
+          audio_duration?: number | null
+          audio_transcription?: string | null
+          category?: string
+          color_theme?: string
+          content?: string
+          created_at?: number
+          id?: string
+          image_url?: string | null
+          is_pinned?: boolean
+          linked_consignment_no?: string | null
+          linked_marka?: string | null
+          title?: string
+          updated_at?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
