@@ -102,9 +102,11 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
         {/* Brand Header */}
         <div className="p-5 border-b border-slate-800/60 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center font-black text-white shrink-0 shadow-lg shadow-blue-500/20 text-base">
-              A
-            </div>
+            <img
+              src={adoLogoFull.url}
+              alt="ADO International"
+              className="h-9 w-auto shrink-0"
+            />
             <div>
               <span className="font-extrabold text-white tracking-wider text-xs block">ADO INTERNATIONAL</span>
               <span className="text-[10px] text-slate-400 font-medium">China-Nepal Transport</span>
