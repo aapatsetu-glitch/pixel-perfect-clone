@@ -54,6 +54,7 @@ export default function LotManagerView() {
       totalGw: number;
       clients: Set<string>;
       origins: Set<string>;
+      containers: Set<string>;
       statusSummary: Set<string>;
     }>();
 
@@ -68,6 +69,7 @@ export default function LotManagerView() {
           totalGw: 0,
           clients: new Set(),
           origins: new Set(),
+          containers: new Set(),
           statusSummary: new Set()
         });
       }
@@ -79,6 +81,8 @@ export default function LotManagerView() {
       group.totalGw += (c.gw || 0);
       if (c.clientName) group.clients.add(c.clientName);
       if (c.origin) group.origins.add(c.origin);
+      const cont = (c.container?.trim() || c.containerNo?.trim() || '');
+      if (cont) group.containers.add(cont);
       if (c.status) group.statusSummary.add(c.status);
     });
 
@@ -88,6 +92,7 @@ export default function LotManagerView() {
       return b.totalCbm - a.totalCbm;
     });
   }, [data]);
+
 
   // Filtered lots
   const filteredLots = useMemo(() => {
