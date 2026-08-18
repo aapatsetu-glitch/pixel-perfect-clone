@@ -179,7 +179,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Header */}
-        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between z-10 shrink-0 shadow-2xs">
+        <header className="h-16 bg-white border-b border-sky-200 px-6 flex items-center justify-between z-10 shrink-0 shadow-2xs">
           <div className="flex items-center space-x-3">
             <button 
               onClick={() => setIsSidebarOpen(true)} 
