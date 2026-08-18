@@ -146,7 +146,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
                   <span>{item.label}</span>
                 </div>
                 {item.id === 'ai' && (
-                  <span className="text-[9px] font-black bg-blue-500 text-white px-1.5 py-0.5 rounded-full uppercase">
+                  <span className="text-[9px] font-black bg-sky-500 text-white px-1.5 py-0.5 rounded-full uppercase">
                     AI
                   </span>
                 )}
@@ -156,16 +156,16 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
         </nav>
 
         {/* User Card */}
-        <div className="p-3.5 mt-auto border-t border-slate-800/60 bg-slate-900/40">
-          <div className="bg-slate-900/80 p-3 rounded-xl flex items-center space-x-3 border border-slate-800">
-            <div className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400/30 shrink-0 flex items-center justify-center text-blue-300 font-black text-xs">
+        <div className="p-3.5 mt-auto border-t border-sky-100 bg-sky-50/70">
+          <div className="bg-white p-3 rounded-xl flex items-center space-x-3 border border-sky-200 shadow-xs">
+            <div className="w-9 h-9 rounded-xl bg-sky-100 border border-sky-200 shrink-0 flex items-center justify-center text-sky-700 font-black text-xs">
               AB
             </div>
             <div className="text-left flex-1 min-w-0">
-              <div className="text-xs font-bold text-white truncate">{userEmail || 'ADO Bishal Logistics'}</div>
+              <div className="text-xs font-bold text-slate-800 truncate">{userEmail || 'ADO Bishal Logistics'}</div>
               <button
                 onClick={onSignOut}
-                className="text-[10px] text-slate-400 hover:text-white font-medium flex items-center space-x-1"
+                className="text-[10px] text-slate-500 hover:text-sky-700 font-medium flex items-center space-x-1"
               >
                 <LogOut size={11} />
                 <span>Sign out</span>
@@ -173,6 +173,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
             </div>
           </div>
         </div>
+
       </aside>
 
       {/* Main Content */}
