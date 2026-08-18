@@ -127,7 +127,23 @@ export default function LotManagerView() {
           </div>
 
           {lotInfo && (
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              {lotInfo.origins.has('Guangzhou') && (
+                <span className="inline-flex items-center gap-1.5 bg-blue-600 text-white px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wide shadow-sm">
+                  <Building2 size={14} /> Guangzhou
+                  <span className="bg-white/25 px-1.5 rounded font-mono">
+                    {lotData.filter(c => c.origin === 'Guangzhou').length}
+                  </span>
+                </span>
+              )}
+              {lotInfo.origins.has('Yiwu') && (
+                <span className="inline-flex items-center gap-1.5 bg-orange-500 text-white px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wide shadow-sm">
+                  <Building2 size={14} /> Yiwu
+                  <span className="bg-white/25 px-1.5 rounded font-mono">
+                    {lotData.filter(c => c.origin === 'Yiwu').length}
+                  </span>
+                </span>
+              )}
               <div className="bg-teal-50 border border-teal-200 px-4 py-2 rounded-xl text-right">
                 <span className="text-[10px] font-bold uppercase text-teal-800 block">Lot Batch Total</span>
                 <span className="text-sm font-black text-teal-950">
