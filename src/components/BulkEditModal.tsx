@@ -20,15 +20,17 @@ export default function BulkEditModal({ selectedIds, onClose, onSave }: BulkEdit
   const [remarks, setRemarks] = useState('');
   
   // Transit points sub-fields
-  const [transitUpdates, setTransitUpdates] = useState<Partial<Record<TransitPoint, { containerNo: string, loadingDate: string }>>>({});
+  type TransitDraft = { containerNo: string; loadingDate: string; dispatchedTo: string; loadedCtn: string };
+  const emptyDraft: TransitDraft = { containerNo: '', loadingDate: '', dispatchedTo: '', loadedCtn: '' };
+  const [transitUpdates, setTransitUpdates] = useState<Partial<Record<TransitPoint, TransitDraft>>>({});
   
   const [loading, setLoading] = useState(false);
 
-  const handleTransitChange = (tp: TransitPoint, field: 'containerNo' | 'loadingDate', value: string) => {
+  const handleTransitChange = (tp: TransitPoint, field: keyof TransitDraft, value: string) => {
     setTransitUpdates(prev => ({
       ...prev,
       [tp]: {
-        ...(prev[tp] || { containerNo: '', loadingDate: '' }),
+        ...(prev[tp] || emptyDraft),
         [field]: value
       }
     }));
@@ -52,11 +54,15 @@ export default function BulkEditModal({ selectedIds, onClose, onSave }: BulkEdit
     // Filter transit updates to only non-empty fields
     const validTransit: any = {};
     for (const [tp, data] of Object.entries(transitUpdates)) {
-      const tpEntry = data as { containerNo?: string; loadingDate?: string } | undefined;
-      if (tpEntry && (tpEntry.containerNo?.trim() || tpEntry.loadingDate?.trim())) {
+      const tpEntry = data as Partial<TransitDraft> | undefined;
+      if (!tpEntry) continue;
+      const hasValue = tpEntry.containerNo?.trim() || tpEntry.loadingDate?.trim() || tpEntry.dispatchedTo?.trim() || tpEntry.loadedCtn?.trim();
+      if (hasValue) {
         validTransit[tp] = {
           containerNo: tpEntry.containerNo?.trim() || '',
-          loadingDate: tpEntry.loadingDate?.trim() || ''
+          loadingDate: tpEntry.loadingDate?.trim() || '',
+          dispatchedTo: tpEntry.dispatchedTo?.trim() || '',
+          loadedCtn: tpEntry.loadedCtn?.trim() ? Number(tpEntry.loadedCtn) : null
         };
       }
     }
