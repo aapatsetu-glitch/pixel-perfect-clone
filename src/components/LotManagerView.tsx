@@ -206,19 +206,36 @@ export default function LotManagerView() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredLots.map(lg => {
           const isUnassigned = lg.lotNo === 'UNASSIGNED';
+          const gzCount = lg.consignments.filter(c => c.origin === 'Guangzhou').length;
+          const ywCount = lg.consignments.filter(c => c.origin === 'Yiwu').length;
+          const gzCbm = lg.consignments.filter(c => c.origin === 'Guangzhou').reduce((s, c) => s + (c.cbm || 0), 0);
+          const ywCbm = lg.consignments.filter(c => c.origin === 'Yiwu').reduce((s, c) => s + (c.cbm || 0), 0);
+          const isMixed = gzCount > 0 && ywCount > 0;
+          const accent = isUnassigned
+            ? 'border-amber-300 bg-amber-50/30 hover:border-amber-400'
+            : isMixed
+              ? 'border-violet-300 bg-violet-50/20 hover:border-violet-500'
+              : ywCount > 0
+                ? 'border-orange-300 bg-orange-50/20 hover:border-orange-500'
+                : 'border-blue-300 bg-blue-50/20 hover:border-blue-500';
           return (
             <div
               key={lg.lotNo}
               onClick={() => setSelectedLot(lg.lotNo)}
-              className={`p-6 rounded-2xl border cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 bg-white flex flex-col justify-between ${
-                isUnassigned ? 'border-amber-300 bg-amber-50/20' : 'border-slate-300 hover:border-teal-500'
-              }`}
+              className={`relative overflow-hidden p-6 rounded-2xl border cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 bg-white flex flex-col justify-between ${accent}`}
             >
+              {/* Origin accent stripe */}
+              <div className="absolute inset-x-0 top-0 h-1.5 flex">
+                {gzCount > 0 && <div className="bg-blue-600 h-full" style={{ flex: gzCount }} />}
+                {ywCount > 0 && <div className="bg-orange-500 h-full" style={{ flex: ywCount }} />}
+                {gzCount === 0 && ywCount === 0 && <div className="bg-slate-300 h-full flex-1" />}
+              </div>
+
               <div>
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex items-center space-x-3">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-mono font-bold text-sm ${
-                      isUnassigned ? 'bg-amber-100 text-amber-800' : 'bg-teal-50 text-teal-700 border border-teal-200'
+                      isUnassigned ? 'bg-amber-100 text-amber-800' : isMixed ? 'bg-violet-100 text-violet-700 border border-violet-200' : ywCount > 0 ? 'bg-orange-100 text-orange-700 border border-orange-200' : 'bg-blue-100 text-blue-700 border border-blue-200'
                     }`}>
                       <Hash size={18} />
                     </div>
@@ -234,6 +251,34 @@ export default function LotManagerView() {
                   <ChevronRight size={18} className="text-slate-400" />
                 </div>
 
+                {/* Prominent origin badges */}
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  {gzCount > 0 && (
+                    <span className="inline-flex items-center gap-1.5 bg-blue-600 text-white px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wide shadow-sm">
+                      <Building2 size={13} />
+                      Guangzhou
+                      <span className="bg-white/25 px-1.5 rounded font-mono">{gzCount}</span>
+                    </span>
+                  )}
+                  {ywCount > 0 && (
+                    <span className="inline-flex items-center gap-1.5 bg-orange-500 text-white px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wide shadow-sm">
+                      <Building2 size={13} />
+                      Yiwu
+                      <span className="bg-white/25 px-1.5 rounded font-mono">{ywCount}</span>
+                    </span>
+                  )}
+                  {isMixed && (
+                    <span className="inline-flex items-center gap-1 bg-violet-100 text-violet-800 border border-violet-200 px-2 py-1 rounded-lg text-[10px] font-bold uppercase">
+                      Mixed Origin
+                    </span>
+                  )}
+                  {gzCount === 0 && ywCount === 0 && (
+                    <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-600 border border-slate-200 px-2 py-1 rounded-lg text-[10px] font-bold uppercase">
+                      No Origin Set
+                    </span>
+                  )}
+                </div>
+
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1.5 text-xs mb-3">
                   <div className="flex justify-between">
                     <span className="text-slate-500">Volume Total:</span>
@@ -243,10 +288,18 @@ export default function LotManagerView() {
                     <span className="text-slate-500">Gross Weight:</span>
                     <span className="font-bold text-slate-800">{formatNumber(lg.totalGw)} KG</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Origins:</span>
-                    <span className="font-bold text-slate-800">{Array.from(lg.origins).join(', ') || 'Mixed'}</span>
-                  </div>
+                  {gzCount > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-blue-700 font-semibold">Guangzhou CBM:</span>
+                      <span className="font-bold text-blue-800 font-mono">{formatNumber(gzCbm)}</span>
+                    </div>
+                  )}
+                  {ywCount > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-orange-700 font-semibold">Yiwu CBM:</span>
+                      <span className="font-bold text-orange-800 font-mono">{formatNumber(ywCbm)}</span>
+                    </div>
+                  )}
                 </div>
 
                 {lg.clients.size > 0 && (
