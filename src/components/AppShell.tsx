@@ -195,7 +195,7 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-2 text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            <div className="hidden md:flex items-center space-x-2 text-xs font-bold text-sky-700 bg-sky-50 px-3 py-1.5 rounded-lg border border-sky-200">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               <span>Kathmandu HQ Active</span>
             </div>
