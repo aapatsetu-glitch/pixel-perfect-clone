@@ -96,29 +96,29 @@ export default function AppShell({ userEmail, onSignOut }: { userEmail: string; 
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-slate-50 font-sans text-slate-900">
+    <div className="flex h-screen w-full overflow-hidden bg-sky-50 font-sans text-slate-900">
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 bg-slate-950 text-slate-300 w-64 z-20 flex flex-col flex-shrink-0 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 border-r border-slate-800 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed inset-y-0 left-0 bg-white text-slate-700 w-64 z-20 flex flex-col flex-shrink-0 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 border-r border-sky-200 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Brand Header */}
-        <div className="p-5 border-b border-slate-800/60 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <img
-              src={adoLogoFull.url}
-              alt="ADO International"
-              className="h-9 w-auto shrink-0"
-            />
-            <div>
-              <span className="font-extrabold text-white tracking-wider text-xs block">ADO INTERNATIONAL</span>
-              <span className="text-[10px] text-slate-400 font-medium">China-Nepal Transport</span>
-            </div>
-          </div>
+        <div className="p-5 border-b border-sky-100 bg-sky-50/70 relative">
           <button 
             onClick={() => setIsSidebarOpen(false)} 
-            className="lg:hidden text-slate-400 hover:text-white p-1"
+            className="lg:hidden absolute top-3 right-3 text-slate-400 hover:text-slate-700 p-1"
           >
             <X size={18} />
           </button>
+          <div className="flex flex-col items-center text-center space-y-2">
+            <img
+              src={adoLogoFull.url}
+              alt="ADO International"
+              className="h-20 w-auto max-w-full object-contain"
+            />
+            <span className="text-[11px] font-extrabold text-sky-800 tracking-wide leading-tight">
+              ADO International Transport Nepal
+            </span>
+          </div>
         </div>
+
 
         {/* Navigation */}
         <nav className="flex-1 py-4 px-3 space-y-1 custom-scrollbar overflow-y-auto">
