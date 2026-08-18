@@ -394,8 +394,8 @@ export async function exportClientLedgerToExcel(
   if (logoBuf) {
     const logoId = workbook.addImage({ buffer: logoBuf as any, extension: 'png' });
     sheet.addImage(logoId, {
-      tl: { col: 0, row: 0 },
-      br: { col: 2, row: 3 },
+      tl: { col: 0.1, row: 0.1 },
+      br: { col: 1.6, row: 2.6 },
       editAs: 'twoCell',
     } as any);
   }
