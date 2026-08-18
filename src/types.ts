@@ -38,6 +38,8 @@ export interface TransitData {
   containerNo: string;
   loadingDate: string; // Dispatch / Loading date
   dispatchDate?: string; // Synonym for loadingDate
+  dispatchedTo?: string; // Next destination from this transit point
+  loadedCtn?: number | null; // Cartons loaded at this transit point
 }
 
 export interface Consignment {
